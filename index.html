@@ -1,54 +1,11 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="style.css">
-		<script src="jquery.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="build/css/main.css">
+		<script src="build/js/main.js"></script>
 	</head>
 	<body>
-		<script>
-			$(document).ready(function() {
-				var csv = [];
 
-			    getValues();
-			    getValues2();
-
-			    function getValues2(){
-		            $.ajax({
-		            	url: 'majors.json',
-		                type: 'get',
-		                cache: false,
-		                success: postProcessing,
-		                async:true,
-		            });
-			    };
-
-			    function postProcessing(data) {
-			       csv.push(data);
-			       appender(data);
-
-			    }
-
-			});
-			function appender(data) {
-				console.log(data);
-
-				if (data[0].length !== data[1].length) {
-					$('.content').append('<div class="warning">Warning, Arrays are not the same length</div>');
-				}
-
-				$.each(data[0], function(data) {
-					if (data[0].CODE !== data[1].CODE) {
-						$('.description').append('<div class="notSame">' + data[0].CODE + '|' + data[1].CODE + '</div>');
-					}
-				});
-
-				$.each(data[0], function(data) {
-					if (data[0].DESCRIPTION !== data[1].DESCRIPTION) {
-						$('.description').append('<div class="notSame">' + data[0].DESCRIPTION + '|' + data[1].DESCRIPTION + '</div>');
-					}
-				});
-			};
-		</script>
 		<div class="content">
 			<h2>Codes</h2>
 				<div class="code"></div>
