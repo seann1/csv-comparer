@@ -1,3 +1,6 @@
+var Converter=require('csv');
+
+var csvFileName="./myCSVFile";
 
 var csv1 = [];
 var csv2 = [];
