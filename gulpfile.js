@@ -50,8 +50,7 @@ gulp.task('html', function () {
 
 gulp.task('watch', function () {
   gulp.watch(['./scripts/main.js'], connect.reload());
-  gulp.watch('./css/**/*.css', ['sass'])
-  	.pipe(connect.reload());
+  gulp.watch(['./css/*.css'], connect.reload());
 });
 
 gulp.task('default', ['libraries', 'styles', 'connect', 'watch']);
