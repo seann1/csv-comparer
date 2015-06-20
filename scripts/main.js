@@ -1,18 +1,33 @@
-
-
 var csv1 = [];
 var csv2 = [];
 $(document).ready(function() {
-    $.getJSON('majorsFromxml.json', function(data) {
-    	csv1.push(data);
-    	$.getJSON('majors.json', function(data) {
-			csv2.push(data);
-			appender(csv1, csv2);
-		});
+	$('.submitButton').click(function() {
+		$('#chosenFile').parse({
+			config: {
+				header: true,
+				complete: function(results, file) {
+					var json = JSON.stringify(results.data);
+					console.log(json);
+					readJson(json);
+				},
+				error: function(err, file, inputElem, reason) { 
+					console.log(err);
+				}
+			}
+	    });
+	});
 
-    });
+  //   $.getJSON('majorsFromxml.json', function(data) {
+  //   	csv1.push(data);
+  //   	$.getJSON('majors.json', function(data) {
+		// 	csv2.push(data);
+		// 	appender(csv1, csv2);
+		// });
+
+  //   });
 
 });
+
 function appender(data1, data2) {
 	var csv1 = [].concat.apply([], data1);
 	var csv2 = [].concat.apply([], data2);
@@ -32,3 +47,11 @@ function appender(data1, data2) {
 		}
 	});
 };
+
+function readJson(inputJson) {
+	$('.content').append('<p>'+ inputJson + '</p>');
+}
+
+
+
+
