@@ -1,13 +1,11 @@
-var Converter=require('csv');
 
-var csvFileName="./myCSVFile";
 
 var csv1 = [];
 var csv2 = [];
 $(document).ready(function() {
-    $.getJSON('xml/majorsFromxml.json', function(data) {
+    $.getJSON('majorsFromxml.json', function(data) {
     	csv1.push(data);
-    	$.getJSON('xml/majors.json', function(data) {
+    	$.getJSON('majors.json', function(data) {
 			csv2.push(data);
 			appender(csv1, csv2);
 		});
