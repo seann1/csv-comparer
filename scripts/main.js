@@ -1,14 +1,16 @@
-var csv1 = [];
-var csv2 = [];
 $(document).ready(function() {
 	$('.submitButton').click(function() {
 		$('#chosenFile').parse({
 			config: {
 				header: true,
 				complete: function(results, file) {
-					var json = JSON.stringify(results.data);
+					var json = results.data;
 					console.log(json);
 					readJson(json);
+
+					$('pre code').each(function(i, block) {
+					    hljs.highlightBlock(block);
+					});
 				},
 				error: function(err, file, inputElem, reason) { 
 					console.log(err);
@@ -16,40 +18,12 @@ $(document).ready(function() {
 			}
 	    });
 	});
-
-  //   $.getJSON('majorsFromxml.json', function(data) {
-  //   	csv1.push(data);
-  //   	$.getJSON('majors.json', function(data) {
-		// 	csv2.push(data);
-		// 	appender(csv1, csv2);
-		// });
-
-  //   });
-
 });
 
-function appender(data1, data2) {
-	var csv1 = [].concat.apply([], data1);
-	var csv2 = [].concat.apply([], data2);
-	if (csv1.length !== csv2.length) {
-		$('.content').append('<div class="warning">Warning, Arrays are not the same length</div>');
-	}
-
-	$.each(csv1, function(index, data) {
-		if (data.CODE !== csv2[index].CODE) {
-			$('.description').append('<div class="notSame">' + data.CODE + '|' + csv2[index].CODE + '</div>');
-		}
-	});
-
-	$.each(csv1, function(index, data) {
-		if (data.DESCRIPTION !== csv2[index].DESCRIPTION) {
-			$('.description').append('<div class="notSame">' + data.DESCRIPTION + '|' + csv2[index].DESCRIPTION + '</div>');
-		}
-	});
-};
-
 function readJson(inputJson) {
-	$('.content').append('<p>'+ inputJson + '</p>');
+	$.each(inputJson, function(index, value) {
+		$('.content').append('<pre><code class="xml">&lt;datum code="'+value.CODE+'">' + value.DESCRIPTION + '&lt;/datum></code></pre>');
+	});
 }
 
 
