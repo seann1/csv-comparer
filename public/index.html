@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="build/css/main.min.css">
+		<link rel="stylesheet" type="text/css" href="css/styles.css">
+		<script src="build/js/libraries.min.js"></script>
+		<script data-main="scripts/main" src="scripts/require.js"></script>
+	</head>
+	<body>
+		<div class="container white">
+			<h2>Datum Code Generator</h2>
+			<label class="btn btn-primary btn-lg">Choose CSV File
+				<input type='file' id='chosenFile'/>
+			</label>
+
+			<form action="./scripts/main.js" class="dropzone" id="csvDropzone">
+			</form>
+			<button class="btn btn-primary btn-lg submitButton">Parse</button>
+			<div class="content">
+				<pre><code class="xml"></code></pre>
+			</div>
+		</div>
+	</body>
+</html>

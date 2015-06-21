@@ -1,0 +1,43 @@
+.notSame {
+	background-color: green;
+	color: #ffffff;
+	font-size: 1.5em;
+	padding: 10px;
+	margin: 10px;
+	color: black;
+	&:hover {
+		background-color: black;
+		border-radius: 10px;
+	}
+}
+
+body {
+	background-color: #919191
+}
+
+// .white {
+// 	background-color: white;
+// 	height:100vh;
+// }
+
+.content {
+	height:600px;
+	overflow:auto;
+	margin-top: 20px;
+}
+
+::selection {
+	color: #009165;
+	background: #b7b7b7; /* WebKit/Blink Browsers */
+	outline: #00fff6;
+}
+
+#chosenFile {
+	display: none;
+}
+
+#csvDropzone {
+	height: 300px;
+	width: 300px;
+	background-color: white;
+}

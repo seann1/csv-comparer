@@ -4,7 +4,9 @@
   "description": "project for CollegeNET",
   "main": "scripts/main.js",
   "dependencies": {
+    "body-parser": "^1.13.1",
     "csv": "^0.4.5",
+    "express": "^4.12.4",
     "grunt": "^0.4.5",
     "require": "^2.4.18"
   },

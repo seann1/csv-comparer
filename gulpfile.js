@@ -16,10 +16,14 @@ gulp.task('sass', function () {
 	    .pipe(gulp.dest('css/'));
 });
 
+gulp.task('sass:watch', function () {
+  gulp.watch('./sass/*.scss', ['sass']);
+});
+
 gulp.task('libraries', function() {
     return gulp.src(['bower_components/jquery/dist/jquery.js', 
     				'bower_components/bootstrap/dist/js/bootstrap.js',
-            'scripts/papaparse.min.js', 'scripts/highlight.pack.js'])
+            'scripts/papaparse.min.js', 'scripts/highlight.pack.js', 'scripts/dropzone.js'])
     	.pipe(uglify())
       	.pipe(concat('libraries.min.js'))
       	.pipe(gulp.dest('build/js'));
@@ -34,8 +38,7 @@ gulp.task('libraries', function() {
 
 gulp.task('styles', function() {
     return gulp.src(['bower_components/bootstrap/dist/css/bootstrap.css',
-    				'bower_components/bootstrap/dist/css/bootstrap-theme.css',
-            'css/color-brewer.css'])
+    				'bower_components/bootstrap/dist/css/bootstrap-theme.css', 'css/railscasts.css'])
       	.pipe(minifyCss({compatibility: 'ie8'}))
       	.pipe(concat('main.min.css'))
       	.pipe(gulp.dest('build/css'));
@@ -55,7 +58,7 @@ gulp.task('watch', function () {
   return gulp.watch(['./scripts/main.js', './css/*.css'], ['html']);
 });
 
-gulp.task('default', ['libraries', 'styles', 'connect', 'watch']);
+gulp.task('default', ['libraries', 'styles', 'connect', 'watch', 'sass:watch']);
 
 
 
