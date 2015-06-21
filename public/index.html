@@ -9,14 +9,16 @@
 	<body>
 		<div class="container white">
 			<h2>Datum Code Generator</h2>
-			<label class="btn btn-primary btn-lg">Choose CSV File
+			<label class="btn btn-success btn-lg">Choose CSV File
 				<input type='file' id='chosenFile'/>
 			</label>
 
-			<form action="/dropFile" class="dropzone" id="csvDropzone" method="post" enctype="multipart/form-data">
-			<!-- <input type='file' id='upload'/> -->
-			</form>
+			<!-- <form action="/dropFile" class="dropzone" id="csvDropzone" method="post" enctype="multipart/form-data">
+			<input type='file' id='chosenFile'/>
+			<button type="submit" class="sub-button">submit</button>
+			</form> -->
 			<button class="btn btn-primary btn-lg submitButton">Parse</button>
+			<div class="title"></div>
 			<div class="content">
 				<pre><code class="xml"></code></pre>
 			</div>

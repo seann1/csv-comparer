@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	$('.content').hide();
-	$('.submitButton').click(function() {
+	$('#chosenFile').change(function() {
 		$('#chosenFile').parse({
 			config: {
 				header: true,
@@ -12,7 +12,7 @@ $(document).ready(function() {
 					$('pre code').each(function(i, block) {
 					    hljs.highlightBlock(block);
 					});
-					$('#myModal').modal('hide')
+					$('#myModal').modal('hide');
 				},
 				error: function(err, file, inputElem, reason) { 
 					console.log(err);
