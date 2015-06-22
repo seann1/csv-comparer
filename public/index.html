@@ -1,24 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="csvParser">
 	<head>
 		<link rel="stylesheet" type="text/css" href="build/css/main.min.css">
 		<link rel="stylesheet" type="text/css" href="css/styles.css">
-		<script src="build/js/libraries.min.js"></script>
-		<script data-main="scripts/main" src="scripts/require.js"></script>
+		<script src="../build/js/libraries.min.js"></script>
+		<!--<script data-main="scripts/main" src="scripts/require.js"></script>-->
+		<script src="scripts/main.js"></script>
 	</head>
-	<body>
+	<body ng-controller="csvCtrl">
 		<div class="container white">
 			<h2>Datum Code Generator</h2>
-			<label class="btn btn-success btn-lg">Choose CSV File
-				<input type='file' id='chosenFile'/>
-			</label>
-
-			<!-- <form action="/dropFile" class="dropzone" id="csvDropzone" method="post" enctype="multipart/form-data">
-			<input type='file' id='chosenFile'/>
-			<button type="submit" class="sub-button">submit</button>
-			</form> -->
+			<form ng-submit="addCsv()">
+				<label class="btn btn-success btn-lg">Choose CSV File
+					<input type='file' id='chosenFile' ng-model="csvFile"/>
+				</label>
+				<button type="submit" class="btn btn-primary">Submit</button>
+			</form>
 			<button class="btn btn-primary btn-lg submitButton">Parse</button>
-			<div class="title"></div>
+			<div ng-show="csvContents"></div>
 			<div class="content">
 				<pre><code class="xml"></code></pre>
 			</div>

@@ -18,9 +18,9 @@ gulp.task('sass:watch', function () {
 });
 
 gulp.task('libraries', function() {
-    return gulp.src(['bower_components/jquery/dist/jquery.js', 
-    				'bower_components/bootstrap/dist/js/bootstrap.js',
-            'public/scripts/papaparse.min.js', 'public/scripts/highlight.pack.js', 'public/scripts/dropzone.js'])
+    return gulp.src(['node_modules/angular/angular.js', 'bower_components/jquery/dist/jquery.js', 
+    				'bower_components/bootstrap/dist/js/bootstrap.js', 'public/scripts/papaparse.min.js', 
+            'public/scripts/highlight.pack.js'])
     	.pipe(uglify())
       	.pipe(concat('libraries.min.js'))
       	.pipe(gulp.dest('build/js'));
