@@ -2,8 +2,16 @@ var csvParser = angular.module('csvParser', []);
 csvParser.controller('csvCtrl', function($scope) {
 	$scope.csvContents = [];
 	$scope.csvFile = [];
-	$scope.addCsv = function() {
-		console.log($scope.csvFile);
+	$scope.addCsv = function(evt) {
+		var files = evt.dataTransfer.files
+        if (files.length > 0) {
+            scope.$apply(function(){
+                scope.files = []
+                for (var i = 0; i < files.length; i++) {
+                    scope.files.push(files[i])
+                }
+            })
+        }
 	}
 });
 
