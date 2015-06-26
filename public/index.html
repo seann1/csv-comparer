@@ -18,9 +18,7 @@
 			<div ng-show="csvContents">
 			</div>
 			<div class="content">
-				<pre><code class="xml">
-					<span ng-repeat"datum in datums">{{datum}}</span>
-				</code></pre>
+				<pre><code class="xml"><div ng-repeat="datum in datums track by $index">{{datum}}</div></code></pre>
 			</div>
 		</div>
 	</body>
