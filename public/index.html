@@ -15,9 +15,12 @@
 				</label>
 				<button class="btn btn-primary">Submit</button>
 			<button class="btn btn-primary btn-lg submitButton">Parse</button>
-			<div ng-show="csvContents"></div>
+			<div ng-show="csvContents">
+			</div>
 			<div class="content">
-				<pre><code class="xml"></code></pre>
+				<pre><code class="xml">
+					<span ng-repeat"datum in datums">{{datum}}</span>
+				</code></pre>
 			</div>
 		</div>
 	</body>
