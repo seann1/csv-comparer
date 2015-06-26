@@ -6,39 +6,45 @@ csvParser.service('readJson', function() {
     }
 });
 
-csvParser.service('fileUpload', ['readJson', function () {
+csvParser.service('fileUpload', ['readJson', '$q', function (file, $q) {
+    var deferred = $q.defer();
     this.parseFile = function(file) {
-        Papa.parse(file, {
-                    header: true,
-                    complete: function(results, file) {
-                        console.log(results);
-                        var json = results.data;
-                        $('.content').fadeIn();
 
-                        $('pre code').each(function(i, block) {
-                            hljs.highlightBlock(block);
+                     return $q(function(resolve, reject) {}
+                    Papa.parse(file, {
+                                    header: true,
+                                    complete: function(results, file) {
+                                        console.log(results);
+                                        var json = results.data;
+                                        $('.content').fadeIn();
+
+                                        $('pre code').each(function(i, block) {
+                                            hljs.highlightBlock(block);
+                                        });
+                                    $('#myModal').modal('hide');
+                                    var datums = [];
+                        
+                                    datums.push(_.map(results.data, function(datum){return datums.push('&lt;datum code="'+datum.CODE+'">' + datum.DESCRIPTION + '&lt;/datum>' + '<br/>')}));
+
+
+                                    return deffered.resolve(datums);
+
+                                     // return $scope.datums = datums;
+                                },
+                                error: function(err, file, inputElem, reason) { 
+                                    console.log(err);
+                                    return deferred.promise;
+                                }
                         });
-                     $('#myModal').modal('hide');
-                     var datums = [];
-                     datums.push(_.map(results.data, function(datum){return datums.push('&lt;datum code="'+datum.CODE+'">' + datum.DESCRIPTION + '&lt;/datum>' + '<br/>')}));
-                     return datums;
-
-                     // return $scope.datums = datums;
-                 },
-                 error: function(err, file, inputElem, reason) { 
-                     console.log(err);
-                 }
-         });
-    }
+                    }
 }]);
 
-csvParser.controller('csvCtrl', ['$scope', 'fileUpload', function($scope, fileUpload){
-    $scope.datums = [];
+csvParser.controller('csvCtrl', ['$scope', 'fileUpload', '$q', function($scope, fileUpload, $q){
     $scope.uploadFile = function(files) {
         var file = files.files[0];
-        console.log(file);
-        $scope.datums.push(fileUpload.parseFile(file));
-        
+        fileUpload.parseFile(file).then(function(datum) {
+            return $scope.parent.datums = datum;
+        })
     };
     
 }]);
