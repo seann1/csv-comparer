@@ -37,7 +37,8 @@ csvParser.controller('csvCtrl', ['$scope', 'fileUpload', function($scope, fileUp
     $scope.uploadFile = function(files) {
         var file = files.files[0];
         console.log(file);
-        fileUpload.parseFile(file);
+        $scope.datums.push(fileUpload.parseFile(file));
+        
     };
     
 }]);
