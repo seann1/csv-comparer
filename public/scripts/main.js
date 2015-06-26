@@ -2,7 +2,7 @@ var csvParser = angular.module('csvParser', []);
 
 csvParser.service('fileUpload', function () {
     this.parseFile = function(file) {
-        $(file).parse({
+        $('#chosenFile').parse({
              config: {
                  header: true,
                  complete: function(results, file) {
