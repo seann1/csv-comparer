@@ -2,23 +2,22 @@ var csvParser = angular.module('csvParser', []);
 
 csvParser.service('fileUpload', function () {
     this.parseFile = function(file) {
-        $('#chosenFile').parse({
-             config: {
-                 header: true,
-                 complete: function(results, file) {
-                     var json = results.data;
-                     $('.content').fadeIn();
-                     readJson(json);
+        Papa.parse(file, {
+                    header: true,
+                    complete: function(results, file) {
+                        console.log(results);
+                        var json = results.data;
+                        $('.content').fadeIn();
+                        readJson(json);
 
-                     $('pre code').each(function(i, block) {
-                         hljs.highlightBlock(block);
+                        $('pre code').each(function(i, block) {
+                        hljs.highlightBlock(block);
                      });
                      $('#myModal').modal('hide');
                  },
                  error: function(err, file, inputElem, reason) { 
                      console.log(err);
                  }
-             }
          });
     }
 });
@@ -26,8 +25,8 @@ csvParser.service('fileUpload', function () {
 csvParser.controller('csvCtrl', ['$scope', 'fileUpload', function($scope, fileUpload){
     
     $scope.uploadFile = function(files) {
-        var file = files.item(0);
-        console.log('file is ' + JSON.stringify(file));
+        var file = files.files[0];
+        console.log(file);
         fileUpload.parseFile(file);
     };
     
