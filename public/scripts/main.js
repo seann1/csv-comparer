@@ -1,9 +1,12 @@
 var csvParser = angular.module('csvParser', []);
 
-csvParser.service('fileUpload', function () {
-    this.readJson = function(datum) {
+csvParser.service('readJson', function() {
+    this.printJson = function(datum) {
         return $scope.datums.push('&lt;datum code="'+datum.CODE+'">' + datum.DESCRIPTION + '&lt;/datum>' + '<br/>');
     }
+});
+
+csvParser.service('fileUpload', ['readJson', function () {
     this.parseFile = function(file) {
         Papa.parse(file, {
                     header: true,
@@ -11,14 +14,14 @@ csvParser.service('fileUpload', function () {
                         console.log(results);
                         var json = results.data;
                         $('.content').fadeIn();
-                        readJson(json);
 
                         $('pre code').each(function(i, block) {
                             hljs.highlightBlock(block);
                         });
                      $('#myModal').modal('hide');
-
-                     return _.map(results.data, function(datum){return fileUpload.readJson(datum)});
+                     var datums = [];
+                     datums.push(_.map(results.data, function(datum){return datums.push('&lt;datum code="'+datum.CODE+'">' + datum.DESCRIPTION + '&lt;/datum>' + '<br/>')}));
+                     return datums;
 
                      // return $scope.datums = datums;
                  },
@@ -27,7 +30,7 @@ csvParser.service('fileUpload', function () {
                  }
          });
     }
-});
+}]);
 
 csvParser.controller('csvCtrl', ['$scope', 'fileUpload', function($scope, fileUpload){
     $scope.datums = [];
