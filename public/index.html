@@ -13,8 +13,11 @@
 				<label class="btn btn-success btn-lg">Choose CSV File
 					<input type='file' id='chosenFile' name="file" onchange="angular.element(this).scope().uploadFile(this)"/>
 				</label>
-				<button class="btn btn-primary">Submit</button>
-			<button class="btn btn-primary btn-lg submitButton">Parse</button>
+				<div class="button" ngf-select ng-model="files">Upload using model $watch</div>
+    			<div class="button" ngf-select ngf-change="upload($files)">Upload on file change</div>
+    			Drop File:
+    			<div ngf-drop ng-model="files" class="drop-box" ngf-drag-over-class="dragover" ngf-multiple="true" ngf-allow-dir="false">Drop Images or PDFs files here</div>
+    			<div ngf-no-file-drop>File Drag/Drop is not supported for this browser</div>
 			<div ng-show="csvContents">
 			</div>
 			<div class="content">

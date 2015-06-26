@@ -20,18 +20,12 @@ gulp.task('sass:watch', function () {
 gulp.task('libraries', function() {
     return gulp.src(['node_modules/angular/angular.js', 'bower_components/jquery/dist/jquery.js',
             'public/scripts/underscore.js', 'bower_components/bootstrap/dist/js/bootstrap.js', 
-            'public/scripts/papaparse.min.js', 'public/scripts/highlight.pack.js'])
+            'public/scripts/papaparse.min.js', 'node_modules/ng-file-upload/dist/ng-file-upload.js', 'public/scripts/highlight.pack.js'])
     	.pipe(uglify())
       	.pipe(concat('libraries.min.js'))
       	.pipe(gulp.dest('build/js'));
 });
 
-// gulp.task('scripts', function() {
-//     return gulp.src('scripts/main.js')
-//     	.pipe(uglify())
-//       	.pipe(concat('main.min.js'))
-//       	.pipe(gulp.dest('build/js'));
-// });
 gulp.task('styles', function() {
     return gulp.src(['bower_components/bootstrap/dist/css/bootstrap.css',
     				'bower_components/bootstrap/dist/css/bootstrap-theme.css', 'public/css/railscasts.css'])
@@ -51,7 +45,7 @@ gulp.task('reload', function () {
 });
 
 gulp.task('watch', function () {
-  return gulp.watch(['public/scripts/main.js', 'public/css/*.css'], ['reload']);
+  return gulp.watch(['public/scripts/main.js', 'public/css/*.css', 'public/index.html'], ['reload']);
 });
 
 gulp.task('default', ['libraries', 'styles', 'connect', 'watch', 'sass:watch']);
