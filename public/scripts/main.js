@@ -37,12 +37,9 @@ csvParser.directive("fileDropzone", function() {
 });
 
 csvParser.controller('csvCtrl', ['$scope', function($scope, Upload) {
-
-
-    $scope.datums;
+    $scope.datums
     $scope.image = null
     $scope.imageFileName = ''
-
     $scope.uploadFile = function(files) {
 
         var file = files.files[0];
