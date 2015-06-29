@@ -41,3 +41,13 @@ body {
 	width: 300px;
 	background-color: white;
 }
+
+div[dropzone] {
+    border: 2px dashed #bbb;
+    border-radius: 5px;
+    padding: 25px;
+    text-align: center;
+    font: 20pt bold;
+    color: #bbb;
+    margin-bottom: 20px;
+}
