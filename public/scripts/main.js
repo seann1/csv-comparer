@@ -1,40 +1,50 @@
-var csvParser = angular.module('csvParser', ['ngFileUpload']);
+var csvParser = angular.module('csvParser',[]);
 
-csvParser.directive("dropzone", function() {
-    return {
-        restrict : "A",
-        link: function (scope, elem) {
-            elem.bind('drop', function(evt) {
-                evt.stopPropagation();
-                evt.preventDefault();
-                console.log(evt);
-
-                var files = evt.dataTransfer.files;
-                for (var i = 0, f; f = files[i]; i++) {
-                    var reader = new FileReader();
-                    reader.readAsArrayBuffer(f);
-
-                    reader.onload = (function(theFile) {
-                        return function(e) {
-                            var newFile = { name : theFile.name,
-                                type : theFile.type,
-                                size : theFile.size,
-                                lastModifiedDate : theFile.lastModifiedDate
-                            }
-
-                            scope.addfile(newFile);
-                        };
-                    })(f);
-                }
-            });
+csvParser.directive("fileDropzone", function() {
+  return {
+    restrict: 'A',
+    scope: {
+      file: '=',
+      fileName: '=',
+      uploadCtrlFn: '&callbackFn'
+    },
+    link: function(scope, element, attrs) {
+      var processDragOverOrEnter;
+      processDragOverOrEnter = function(event) {
+        if (event != null) {
+          event.preventDefault();
         }
+        event.dataTransfer.effectAllowed = 'copy';
+        return false;
+      };
+      element.bind('dragover', processDragOverOrEnter);
+      element.bind('dragenter', processDragOverOrEnter);
+      return element.bind('drop', function(event) {
+        var name, reader, size, type;
+          if (event != null) {
+            event.preventDefault();
+          }
+        scope.uploadCtrlFn({arg1: event.dataTransfer});
+        //scope.$apply('csvCtrl.uploadFile(event.dataTransfer.files[0])');
+        // reader.onload = function(evt) {
+        //   return scope.$apply(function() {
+        //     scope.file = evt.target.result;
+        //     if (angular.isString(scope.fileName)) {
+        //       return scope.fileName = name;
+        //     }
+        //   });
+        // }
+      });
     }
+  }
 });
 
-csvParser.controller('csvCtrl', ['$scope', 'Upload', function($scope, Upload) {
+csvParser.controller('csvCtrl', ['$scope', function($scope, Upload) {
 
 
     $scope.datums;
+    $scope.image = null
+    $scope.imageFileName = ''
 
     $scope.uploadFile = function(files) {
 

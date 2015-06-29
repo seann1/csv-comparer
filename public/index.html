@@ -12,7 +12,8 @@
 				<label class="btn btn-success btn-lg">Choose CSV File
 					<input type='file' id='chosenFile' name="file" onchange="angular.element(this).scope().uploadFile(this)"/>
 				</label>
-			<div dropzone>Drop Files Here</div>
+				<div class="dropzone" file-dropzone callback-fn="uploadFile(arg1)">
+				<span>Drop Image Here</span>
 			<div ng-show="csvContents">
 			</div>
 			<div class="content">
