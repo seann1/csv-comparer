@@ -49,16 +49,17 @@ csvParser.controller('csvCtrl', ['$scope', function($scope, Upload) {
         Papa.parse(file, {header: true,
                             complete: function(results, file) {
                                 function printJson(file) {
+                                    var code = file.meta.fields[0],
+                                        description = file.meta.fields[1];
                                     var list = [];
-                                    _.map(file, function(datum) {
-                                        return list.push('<datum code="'+datum.CODE+'">' + datum.DESCRIPTION + '</datum>');
+                                    _.map(file.data, function(datum) {
+                                        return list.push('<datum code="'+ datum[code] +'">' + datum[description] + '</datum>');
                                     });
                                     return list;
                                 }
-                                console.log(results.data);
 
                                 $scope.$apply(function() {
-                                    $scope.datums = printJson(results.data);
+                                    $scope.datums = printJson(results);
                                 });
                                 $('pre code').each(function(i, block) {
                                     hljs.highlightBlock(block);

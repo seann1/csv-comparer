@@ -112,8 +112,10 @@ body {
 	font-family: gothic;
 	font-size: 4em;
 	padding: 0px;
+	color: black;
 }
 
 .dragged {
 	background-color: green;
+	transition: all 1s;
 }
