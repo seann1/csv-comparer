@@ -9,7 +9,8 @@ csvParser.directive("fileDropzone", function() {
       uploadCtrlFn: '&callbackFn'
     },
     link: function(scope, element, attrs) {
-      var processDragOverOrEnter;
+      var processDragOverOrEnter,
+          changeBox;
       processDragOverOrEnter = function(event) {
         if (event != null) {
           event.preventDefault();
@@ -17,6 +18,10 @@ csvParser.directive("fileDropzone", function() {
         event.dataTransfer.effectAllowed = 'copy';
         return false;
       };
+      changeBox = function() {
+        $(event.target).toggleClass('dragged');
+      }
+      element.bind('dragenter dragleave', changeBox)
       element.bind('dragover', processDragOverOrEnter);
       element.bind('dragenter', processDragOverOrEnter);
       return element.bind('drop', function(event) {
@@ -25,15 +30,7 @@ csvParser.directive("fileDropzone", function() {
             event.preventDefault();
           }
         scope.uploadCtrlFn({arg1: event.dataTransfer});
-        //scope.$apply('csvCtrl.uploadFile(event.dataTransfer.files[0])');
-        // reader.onload = function(evt) {
-        //   return scope.$apply(function() {
-        //     scope.file = evt.target.result;
-        //     if (angular.isString(scope.fileName)) {
-        //       return scope.fileName = name;
-        //     }
-        //   });
-        // }
+
       });
     }
   }

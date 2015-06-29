@@ -9,11 +9,21 @@
 	<body ng-controller="csvCtrl">
 		<div class="container white">
 			<h2>Datum Code Generator</h2>
-				<label class="btn btn-success btn-lg">Choose CSV File
-					<input type='file' id='chosenFile' name="file" onchange="angular.element(this).scope().uploadFile(this)"/>
-				</label>
-				<div class="dropzone" file-dropzone callback-fn="uploadFile(arg1)">
-				<span>Drop Image Here</span>
+			<div class="row">
+				<div class="col-md-3">
+					<label class="btn btn-success btn-lg csvButton">Choose CSV File
+						<input type='file' id='chosenFile' name="file" onchange="angular.element(this).scope().uploadFile(this)"/>
+					</label>
+				</div>
+				<div class="col-md-1">
+					<p class="gothic">Or</p>
+				</div>
+				<div class="col-md-8">
+					<div class="dropzone" file-dropzone callback-fn="uploadFile(arg1)">
+						<span>Drop File Here</span>
+					</div>
+				</div>
+			</div>
 			<div ng-show="csvContents">
 			</div>
 			<div class="content">

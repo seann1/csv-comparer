@@ -19,7 +19,7 @@ gulp.task('sass:watch', function () {
 
 gulp.task('libraries', function() {
     return gulp.src(['node_modules/angular/angular.js', 'bower_components/jquery/dist/jquery.js',
-            'public/scripts/underscore.js', 'bower_components/bootstrap/dist/js/bootstrap.js', 
+            'public/scripts/underscore.js', 'bower_components/bootstrap/dist/js/bootstrap.js',
             'public/scripts/papaparse.min.js', 'node_modules/ng-file-upload/dist/ng-file-upload.js', 'public/scripts/highlight.pack.js'])
     	.pipe(uglify())
       	.pipe(concat('libraries.min.js'))
@@ -28,7 +28,7 @@ gulp.task('libraries', function() {
 
 gulp.task('styles', function() {
     return gulp.src(['bower_components/bootstrap/dist/css/bootstrap.css',
-    				'bower_components/bootstrap/dist/css/bootstrap-theme.css', 'public/css/railscasts.css'])
+    				'public/css/railscasts.css'])
       	.pipe(minifyCss({compatibility: 'ie8'}))
       	.pipe(concat('main.min.css'))
       	.pipe(gulp.dest('public/build/css'));
@@ -49,8 +49,3 @@ gulp.task('watch', function () {
 });
 
 gulp.task('default', ['libraries', 'styles', 'connect', 'watch', 'sass:watch']);
-
-
-
-
-
