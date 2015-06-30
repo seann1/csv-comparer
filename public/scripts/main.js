@@ -55,6 +55,7 @@ csvParser.controller('csvCtrl', ['$scope', function($scope, Upload) {
                                     _.map(file.data, function(datum) {
                                         return list.push('<datum code="'+ datum[code] +'">' + datum[description] + '</datum>');
                                     });
+                                    $scope.length = list.length
                                     return list;
                                 }
 

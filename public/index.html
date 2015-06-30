@@ -7,13 +7,14 @@
 		<script src="scripts/main.js"></script>
 	</head>
 	<body ng-controller="csvCtrl">
-		<div class="container white">
+		<div class="container">
 			<div class="row">
 				<div class="col-md-8">
 					<h2>Datum Code Generator</h2>
 				</div>
 				<div class="col-md-4">
-					<h3 class="fileName" ng-show="datumContainer">{{fileName}}</h3>
+					<h3 class="datumNumber" ng-show="datumContainer">{{length}} Datums</h3>
+					<h3 class="fileName" ng-show="datumContainer"><span class="glyphicon glyphicon-file" aria-hidden="true"></span>{{fileName}}</h3>
 				</div>
 			</div>
 			<div class="row">
@@ -27,7 +28,7 @@
 				</div>
 				<div class="col-md-8">
 					<div class="dropzone" ng-hide="datumContainer" file-dropzone callback-fn="uploadFile(arg1)">
-						<span>Drop File Here</span>
+						<span><h3 class="dropFile">DROP FILE HERE</h3></span>
 					</div>
 				</div>
 			</div>

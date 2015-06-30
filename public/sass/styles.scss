@@ -26,6 +26,10 @@
     src: url(../fonts/middst.TTF);
 }
 
+@font-face {
+    font-family: neon;
+    src: url(../fonts/NEONSERIF-Regular.otf);
+}
 .notSame {
 	background-color: green;
 	color: #ffffff;
@@ -49,15 +53,9 @@ body {
 	}
 }
 
-// .white {
-// 	background-color: white;
-// 	height:100vh;
-// }
-
 .content-container {
 	height:600px;
 	overflow:auto;
-	margin-top: 20px;
 }
 
 ::selection {
@@ -102,7 +100,7 @@ body {
   text-align: left;
   text-shadow: 0 0 3px #fff;
   color: black;
-	margin-top: 45px;
+	margin-top: 20px;
 	background: radial-gradient(ellipse at center, #ffbcea 0%,#d589ff 17%,#89ffa8 31%,#f1ff89 44%,#89e5ff 100%);
 	&:hover {
 		color: red;
@@ -117,12 +115,23 @@ body {
 }
 
 .dragged {
-	background: #e0ffc7 url(../assets/pink.gif) center center;
+	background: url(../assets/iris.gif) center center;
 	transition: all 1s;
 }
 
 .fileName {
   float: right;
-  margin-top: 80px;
+  margin-top: 75px;
   margin-right: 5px;
+}
+
+.dropFile {
+  color: rgba(0, 191, 255, 0.5);
+  font-family: neon;
+  font-size: 4em;
+}
+
+.datumNumber {
+  float: right;
+  margin-top: 75px;
 }
