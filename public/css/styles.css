@@ -34,7 +34,7 @@ body {
     -webkit-animation: neon1 4s ease-in-out 1 alternate;
             animation: neon1 4s ease-in-out 1 alternate; }
 
-.content {
+.content-container {
   height: 600px;
   overflow: auto;
   margin-top: 20px; }
