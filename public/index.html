@@ -8,23 +8,30 @@
 	</head>
 	<body ng-controller="csvCtrl">
 		<div class="container white">
-			<h2>Datum Code Generator</h2>
+			<div class="row">
+				<div class="col-md-8">
+					<h2>Datum Code Generator</h2>
+				</div>
+				<div class="col-md-4">
+					<h3 class="fileName" ng-show="datumContainer">{{fileName}}</h3>
+				</div>
+			</div>
 			<div class="row">
 				<div class="col-md-3">
-					<label class="btn btn-success btn-lg csvButton">Choose CSV File
+					<label class="btn btn-success btn-lg csvButton" ng-hide="datumContainer">Choose CSV File
 						<input type='file' id='chosenFile' name="file" onchange="angular.element(this).scope().uploadFile(this)"/>
 					</label>
 				</div>
 				<div class="col-md-1">
-					<p class="gothic">Or</p>
+					<p class="gothic" ng-hide="datumContainer">Or</p>
 				</div>
 				<div class="col-md-8">
-					<div class="dropzone" file-dropzone callback-fn="uploadFile(arg1)">
+					<div class="dropzone" ng-hide="datumContainer" file-dropzone callback-fn="uploadFile(arg1)">
 						<span>Drop File Here</span>
 					</div>
 				</div>
 			</div>
-			<div class="content-container">
+			<div ng-show="datumContainer" class="content-container">
 				<pre><code class="xml"><div ng-repeat="datum in datums track by $index">{{datum}}</div></code></pre>
 			</div>
 		</div>

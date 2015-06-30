@@ -40,12 +40,15 @@ csvParser.controller('csvCtrl', ['$scope', function($scope, Upload) {
     $scope.datums
     $scope.image = null
     $scope.imageFileName = ''
+    $scope.datumContainer = false
     $scope.uploadFile = function(files) {
 
         var file = files.files[0];
+        $scope.fileName = file.name
         Papa.parse(file, {header: true,
                             complete: function(results, file) {
                                 function printJson(file) {
+                                    $scope.datumContainer = true
                                     var code = file.meta.fields[0],
                                         description = file.meta.fields[1];
                                     var list = [];
