@@ -103,9 +103,8 @@ body {
           transition: all 1s; }
 
 .fileName {
-  float: right;
-  margin-top: 75px;
-  margin-right: 5px; }
+  float: left;
+  margin-top: 75px; }
 
 .dropFile {
   color: rgba(0, 191, 255, 0.5);
@@ -114,4 +113,5 @@ body {
 
 .datumNumber {
   float: right;
-  margin-top: 75px; }
+  margin-top: 78px;
+  margin-right: 10px; }

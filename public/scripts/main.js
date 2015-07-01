@@ -40,6 +40,8 @@ csvParser.controller('csvCtrl', ['$scope', function($scope, Upload) {
     $scope.datums
     $scope.image = null
     $scope.imageFileName = ''
+    $scope.fileName = ''
+    $scope.length = ''
     $scope.datumContainer = false
     $scope.uploadFile = function(files) {
 

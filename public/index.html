@@ -13,8 +13,8 @@
 					<h2>Datum Code Generator</h2>
 				</div>
 				<div class="col-md-4">
-					<h3 class="datumNumber" ng-show="datumContainer">{{length}} Datums</h3>
-					<h3 class="fileName" ng-show="datumContainer"><span class="glyphicon glyphicon-file" aria-hidden="true"></span>{{fileName}}</h3>
+					<h3 class="datumNumber" ng-show="datumContainer" ng-cloak>{{length}} Datums</h3>
+					<h3 class="fileName" ng-show="datumContainer"><span class="glyphicon glyphicon-file" aria-hidden="true"></span ng-cloak>{{fileName}}</h3>
 				</div>
 			</div>
 			<div class="row">
@@ -33,7 +33,7 @@
 				</div>
 			</div>
 			<div ng-show="datumContainer" class="content-container">
-				<pre><code class="xml"><div ng-repeat="datum in datums track by $index">{{datum}}</div></code></pre>
+				<pre><code class="xml"><div ng-repeat="datum in datums track by $index" ng-cloak>{{datum}}</div></code></pre>
 			</div>
 		</div>
 	</body>
