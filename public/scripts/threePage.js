@@ -23,7 +23,7 @@ function init() {
          rings = 16;
        }
        sphere = new THREE.SphereGeometry(radius, segments, rings);
-       material = new THREE.MeshPhongMaterial( { map: THREE.ImageUtils.loadTexture('assets/iris.gif') } );
+       material = new THREE.MeshPhongMaterial( { map: THREE.ImageUtils.loadTexture('assets/pink.gif') } );
        return new THREE.Mesh(sphere, material);
    };
 
@@ -46,14 +46,14 @@ function init() {
     renderer.setSize( 170, 160 );
 
     document.getElementById("threed").appendChild( renderer.domElement );
-
+console.log(geometry)
 }
 
 function animate() {
     var time;
-    time = new Date().getTime() * 0.0005;
+    time = new Date().getTime() * 0.0015;
     light.position.x = Math.sin(time * 0.7) * 30;
-    object.rotation.x += 0.02;
+    object.rotation.x += 0.05;
 
     // note: three.js includes requestAnimationFrame shim
     requestAnimationFrame( animate );
