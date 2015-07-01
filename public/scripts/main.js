@@ -19,7 +19,8 @@ csvParser.directive("fileDropzone", function() {
         return false;
       };
       changeBox = function() {
-        $(event.target).toggleClass('dragged');
+        var imageArray = ['assets/iris.gif', 'assets/pink.gif'];
+        $(event.target).css('background-image', 'url(' + _.shuffle(imageArray)[0] + ')');
       }
       element.bind('dragenter dragleave', changeBox)
       element.bind('dragover', processDragOverOrEnter);

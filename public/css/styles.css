@@ -98,7 +98,6 @@ body {
   color: black; }
 
 .dragged {
-  background: url(../assets/iris.gif) center center;
   -webkit-transition: all 1s;
           transition: all 1s; }
 
@@ -115,3 +114,10 @@ body {
   float: right;
   margin-top: 78px;
   margin-right: 10px; }
+
+#threed {
+  top: 250px;
+  right: -50px;
+  position: fixed;
+  width: 200px;
+  height: 70px; }
