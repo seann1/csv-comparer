@@ -54,6 +54,30 @@ csvParser.controller('csvCtrl', ['$scope', function($scope, Upload) {
                                     $scope.datumContainer = true
                                     var code = file.meta.fields[0],
                                         description = file.meta.fields[1];
+                                    for (var i = 0; i < file.meta.fields.length; i++) {
+                                      var listCode = file.meta.fields[i];
+                                      var check = 0;
+
+                                      $.each(file.data, function(index, value) {
+                                        //console.log(value[listCode]);
+                                        var blank = false;
+
+                                        if (value[listCode] === '') {
+                                          console.log("hi");
+                                          blank = true;
+                                          check += 1;
+                                        } 
+                                      });
+                                      console.log(check);
+
+                                      if (check < 6) {
+                                        var currentArray = [];
+                                        _.map(file.data, function(datum) {
+                                          currentArray.push({ listCode : datum[listCode] });
+                                        });
+                                        console.log(currentArray);
+                                      } 
+                                    }
                                     var list = [];
                                     _.map(file.data, function(datum) {
                                         return list.push('<datum code="'+ $.trim(datum[code]) +'">' + $.trim(datum[description]) + '</datum>');
