@@ -46,8 +46,8 @@
 body {
 	background-color: #919191;
 	h2 {
-		font-family: gothic;
-		font-size: 5em;
+		//font-family: gothic;
+		font-size: 3em;
 		color: #000;
 		animation: neon1 4s ease-in-out 1 alternate;
 	}
@@ -108,7 +108,7 @@ body {
 }
 
 .gothic {
-	font-family: gothic;
+	//font-family: gothic;
 	font-size: 4em;
 	padding: 0px;
 	color: black;
@@ -120,7 +120,6 @@ body {
 
 .fileName {
   float: left;
-  margin-top: 75px;
 }
 
 .dropFile {
@@ -130,9 +129,8 @@ body {
 }
 
 .datumNumber {
-  float: right;
+  float: left;
   margin-top: 78px;
-  margin-right: 10px;
 }
 
 #threed {

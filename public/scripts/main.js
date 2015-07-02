@@ -51,6 +51,8 @@ csvParser.controller('csvCtrl', ['$scope', function($scope, Upload) {
         Papa.parse(file, {header: true,
                             complete: function(results, file) {
                                 function printJson(file) {
+                                  var finalArray = [];
+
                                     $scope.datumContainer = true
                                     var code = file.meta.fields[0],
                                         description = file.meta.fields[1];
@@ -69,20 +71,26 @@ csvParser.controller('csvCtrl', ['$scope', function($scope, Upload) {
                                         } 
                                       });
                                       console.log(check);
-
+                                      var currentArray = [];
                                       if (check < 6) {
-                                        var currentArray = [];
                                         _.map(file.data, function(datum) {
-                                          currentArray.push({ listCode : datum[listCode] });
+                                          currentArray.push(datum[listCode]);
                                         });
-                                        console.log(currentArray);
+                                        finalArray.push(currentArray);
                                       } 
                                     }
+                                    console.log(finalArray);
                                     var list = [];
-                                    _.map(file.data, function(datum) {
-                                        return list.push('<datum code="'+ $.trim(datum[code]) +'">' + $.trim(datum[description]) + '</datum>');
+
+                                    $.each(finalArray[0], function(index, value) {
+                                      if ((finalArray[0][index] === '' && finalArray[1][index] === '') || (finalArray[0][index] === 'CODE' && finalArray[1][index] === 'DESCRIPTION')) {
+                                      } else {
+                                        list.push('<datum code="'+ $.trim(finalArray[0][index]) +'">' + $.trim(finalArray[1][index]) + '</datum>');
+                                      }
                                     });
+                                    list = list.slice(0, -1);
                                     $scope.length = list.length
+
                                     return list;
                                 }
 
