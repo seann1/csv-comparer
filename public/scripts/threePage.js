@@ -6,10 +6,17 @@ animate();
 
 function init() {
 
-    camera = new THREE.PerspectiveCamera( 75, 30 / 70, 1, 10000 );
+    camera = new THREE.PerspectiveCamera( 100, 30 / 70, 1, 10000 );
     camera.position.z = 1000;
     controls = new THREE.TrackballControls( camera );
-    //controls.target.set( 0, 0, 0 )
+    //controls.rotateSpeed = 1.0;
+    //controls.zoomSpeed = 1.2;
+    //controls.panSpeed = 0.8;
+
+    controls.noZoom = false;
+    controls.noPan = false;
+
+    //controls.staticMoving = true;
 
     scene = new THREE.Scene();
 
@@ -65,6 +72,7 @@ function animate() {
 
     mesh.rotation.x += 0.01;
     mesh.rotation.y += 0.02;
+    controls.update();
 
     renderer.render( scene, camera );
 
