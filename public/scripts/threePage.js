@@ -8,6 +8,8 @@ function init() {
 
     camera = new THREE.PerspectiveCamera( 75, 30 / 70, 1, 10000 );
     camera.position.z = 1000;
+    controls = new THREE.TrackballControls( camera );
+    //controls.target.set( 0, 0, 0 )
 
     scene = new THREE.Scene();
 
@@ -37,23 +39,26 @@ function init() {
     light.position.y = 10;
     light.position.z = 3;
     light.intensity = 100;
-    object = createSphere();
+    var radius = 100;
+    object = createSphere(radius);
     scene.add(new THREE.AmbientLight(0xff00F0));
     scene.add(light);
     scene.add(object);
 
     renderer = new THREE.WebGLRenderer();
-    renderer.setSize( 170, 160 );
+    renderer.setSize( 500, 500 );
 
     document.getElementById("threed").appendChild( renderer.domElement );
-console.log(geometry)
+    console.log(geometry);
+    console.log(mesh);
 }
 
 function animate() {
     var time;
     time = new Date().getTime() * 0.0015;
-    light.position.x = Math.sin(time * 0.7) * 30;
+    light.position.x += 1;
     object.rotation.x += 0.05;
+    object.position.x += 0.05;
 
     // note: three.js includes requestAnimationFrame shim
     requestAnimationFrame( animate );

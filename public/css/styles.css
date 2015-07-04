@@ -112,8 +112,10 @@ body {
   margin-top: 78px; }
 
 #threed {
-  top: 250px;
+  /* top: 250px;
   right: -50px;
+  position: fixed; */
+  top: 0px;
   position: fixed;
-  width: 200px;
-  height: 70px; }
+  width: 500px;
+  height: 500px; }
