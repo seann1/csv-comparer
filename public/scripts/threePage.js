@@ -9,14 +9,14 @@ function init() {
     camera = new THREE.PerspectiveCamera( 100, 30 / 70, 1, 10000 );
     camera.position.z = 1000;
     controls = new THREE.TrackballControls( camera );
-    //controls.rotateSpeed = 1.0;
-    //controls.zoomSpeed = 1.2;
-    //controls.panSpeed = 0.8;
+    controls.rotateSpeed = 1.0;
+    controls.zoomSpeed = 1.2;
+    controls.panSpeed = 0.8;
 
-    controls.noZoom = false;
-    controls.noPan = false;
+    //controls.noZoom = false;
+    //controls.noPan = false;
 
-    //controls.staticMoving = true;
+    controls.staticMoving = true;
 
     scene = new THREE.Scene();
 
@@ -71,6 +71,7 @@ function animate() {
     var time;
     time = new Date().getTime() * 0.0015;
     lights[0].position.x -= 0.1;
+    console.log(lights[0].position.x);
     lights[1].position.x += 0.1;
     lights[2].position.x += 0.1;
     lights[3].position.y += 0.1;
