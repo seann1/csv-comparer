@@ -26,13 +26,13 @@ function init() {
          radius = 50;
        }
        if (segments == null) {
-         segments = 16;
+         segments = 10;
        }
        if (rings == null) {
          rings = 16;
        }
        sphere = new THREE.SphereGeometry(radius, segments, rings);
-       material = new THREE.MeshPhongMaterial( { map: THREE.ImageUtils.loadTexture('assets/pink.gif') } );
+       material = new THREE.MeshPhongMaterial({specular: '#a9fcff', color: '#00abb1', emissive: '#006063', shininess: 100});
        return new THREE.Mesh(sphere, material);
    };
 
@@ -41,15 +41,21 @@ function init() {
 
     mesh = new THREE.Mesh( geometry, material );
     scene.add(mesh);
-    light = new THREE.PointLight(0x0040ff, 20, 100 );
-    light.position.x = 20;
-    light.position.y = 10;
-    light.position.z = 3;
-    light.intensity = 100;
+    var x = 0;
+    var y = 0;
+    lights = [];
+    for(var i = 0; i < 7; i++) {
+      colorsArray = [0x00ff65, 0xe1ff00, 0xfa00ff, 0x0040ff];
+      lights[i] = new THREE.PointLight(_.sample(colorsArray), 1, 100 );
+      lights[i].position.set(x, y, 3);
+      lights[i].intensity = 100;
+      scene.add(lights[i]);
+      x -= 1;
+      y -= 1;
+    }
     var radius = 100;
     object = createSphere(radius);
     scene.add(new THREE.AmbientLight(0xff00F0));
-    scene.add(light);
     scene.add(object);
 
     renderer = new THREE.WebGLRenderer();
@@ -58,20 +64,27 @@ function init() {
     document.getElementById("threed").appendChild( renderer.domElement );
     console.log(geometry);
     console.log(mesh);
+    console.log(lights);
 }
 
 function animate() {
     var time;
     time = new Date().getTime() * 0.0015;
-    light.position.x += 1;
-    object.rotation.x += 0.05;
-    object.position.x += 0.05;
+    lights[0].position.x -= 0.1;
+    lights[1].position.x += 0.1;
+    lights[2].position.x += 0.1;
+    lights[3].position.y += 0.1;
+    lights[4].position.z += 0.1;
+    lights[5].position.z += 0.1;
+    lights[6].position.y += 0.1;
+    object.rotation.x += 0.01;
+    object.position.x += 0.01;
 
     // note: three.js includes requestAnimationFrame shim
     requestAnimationFrame( animate );
 
     mesh.rotation.x += 0.01;
-    mesh.rotation.y += 0.02;
+    mesh.rotation.y += 0.01;
     controls.update();
 
     renderer.render( scene, camera );
