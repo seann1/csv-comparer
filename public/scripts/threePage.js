@@ -58,7 +58,7 @@ function init() {
     scene.add(new THREE.AmbientLight(0xff00F0));
     scene.add(object);
 
-    renderer = new THREE.WebGLRenderer();
+    renderer = new THREE.WebGLRenderer({ alpha: true });
     renderer.setSize( 500, 500 );
 
     document.getElementById("threed").appendChild( renderer.domElement );
@@ -70,14 +70,26 @@ function init() {
 function animate() {
     var time;
     time = new Date().getTime() * 0.0015;
-    lights[0].position.x -= 0.1;
-    console.log(lights[0].position.x);
-    lights[1].position.x += 0.1;
-    lights[2].position.x += 0.1;
-    lights[3].position.y += 0.1;
-    lights[4].position.z += 0.1;
-    lights[5].position.z += 0.1;
-    lights[6].position.y += 0.1;
+    function lightPosition(light) {
+                if (light.position.x < -250) {
+                  light.position.x += 0.1
+                  light.position.y += 0.1
+                } else if (light.position.x > -1) {
+                  light.position.x -= 0.1
+                  light.position.y -= 0.1
+                } else {
+                  light.position.x += 0.1
+                  light.position.y += 0.1
+                }
+              };
+
+    lightPosition(lights[0]);
+    lightPosition(lights[1]);
+    lightPosition(lights[2]);
+    lightPosition(lights[3]);
+    lightPosition(lights[4]);
+    lightPosition(lights[5]);
+    console.log(lights[0].position.x)
     object.rotation.x += 0.01;
     object.position.x += 0.01;
 
