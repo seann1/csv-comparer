@@ -1,24 +1,32 @@
 var camera, scene, renderer;
 var geometry, material, mesh;
 
+
 init();
 animate();
 
 function init() {
 
-    camera = new THREE.PerspectiveCamera( 100, 30 / 70, 1, 10000 );
+    camera = new THREE.PerspectiveCamera( 100, 70 / 70, 1, 10000 );
     camera.position.z = 1000;
     controls = new THREE.TrackballControls( camera );
     controls.rotateSpeed = 1.0;
     controls.zoomSpeed = 1.2;
     controls.panSpeed = 0.8;
 
-    //controls.noZoom = false;
-    //controls.noPan = false;
+    var loader = new THREE.ObjectLoader();
+
+    controls.noZoom = false;
+    controls.noPan = false;
 
     controls.staticMoving = true;
 
     scene = new THREE.Scene();
+
+    loader.load('assets/happy-buddha.json', function (obj) {
+      obj.position.set(0, 60, 0);
+      scene.add( obj );
+    });
 
     createSphere = function(radius, segments, rings) {
        var material, sphere;
@@ -32,7 +40,7 @@ function init() {
          rings = 16;
        }
        sphere = new THREE.SphereGeometry(radius, segments, rings);
-       material = new THREE.MeshPhongMaterial({specular: '#a9fcff', color: '#00abb1', emissive: '#006063', shininess: 100});
+       material = new THREE.MeshPhongMaterial({specular: '#a9fcff', color: '#00abb1', emissive: '#006063', shininess: 500});
        return new THREE.Mesh(sphere, material);
    };
 
@@ -42,16 +50,18 @@ function init() {
     mesh = new THREE.Mesh( geometry, material );
     scene.add(mesh);
     var x = 0;
-    var y = 0;
+    var y = 50;
+    var z = 100;
     lights = [];
     for(var i = 0; i < 7; i++) {
       colorsArray = [0x00ff65, 0xe1ff00, 0xfa00ff, 0x0040ff];
       lights[i] = new THREE.PointLight(_.sample(colorsArray), 1, 100 );
-      lights[i].position.set(x, y, 3);
+      lights[i].position.set(x, y, z);
       lights[i].intensity = 100;
       scene.add(lights[i]);
-      x -= 1;
-      y -= 1;
+      x -= 100;
+      y -= 100;
+      z -= 100;
     }
     var radius = 100;
     object = createSphere(radius);
@@ -71,15 +81,12 @@ function animate() {
     var time;
     time = new Date().getTime() * 0.0015;
     function lightPosition(light) {
-                if (light.position.x < -250) {
-                  light.position.x += 0.1
-                  light.position.y += 0.1
-                } else if (light.position.x > -1) {
-                  light.position.x -= 0.1
-                  light.position.y -= 0.1
+                if (light.position.x > -250) {
+                  light.position.x -= 1
+                  light.position.y -= 1
                 } else {
-                  light.position.x += 0.1
-                  light.position.y += 0.1
+                  light.position.x += 300
+                  light.position.y += 300
                 }
               };
 
@@ -89,7 +96,6 @@ function animate() {
     lightPosition(lights[3]);
     lightPosition(lights[4]);
     lightPosition(lights[5]);
-    console.log(lights[0].position.x)
     object.rotation.x += 0.01;
     object.position.x += 0.01;
 
