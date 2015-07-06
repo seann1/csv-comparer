@@ -23,9 +23,9 @@ function init() {
 
     scene = new THREE.Scene();
 
-    loader.load('assets/happy-buddha.json', function (obj) {
-      obj.position.set(0, 60, 0);
-      scene.add( obj );
+    loader.load("assets/happy-buddha.json", function (obj) {
+      obj.position.set(0, 60, 100);
+      scene.add(obj);
     });
 
     createSphere = function(radius, segments, rings) {
@@ -89,6 +89,7 @@ function animate() {
                   light.position.y += 300
                 }
               };
+    OBJLoaded.rotation.x += (0.2*(Math.PI / 180));
 
     lightPosition(lights[0]);
     lightPosition(lights[1]);
@@ -101,7 +102,6 @@ function animate() {
 
     // note: three.js includes requestAnimationFrame shim
     requestAnimationFrame( animate );
-
     mesh.rotation.x += 0.01;
     mesh.rotation.y += 0.01;
     controls.update();
