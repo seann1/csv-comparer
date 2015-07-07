@@ -34,7 +34,7 @@ function init() {
          radius = 50;
        }
        if (segments == null) {
-         segments = 10;
+         segments = 100;
        }
        if (rings == null) {
          rings = 16;
