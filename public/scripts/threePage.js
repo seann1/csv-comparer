@@ -26,6 +26,7 @@ function init() {
     loader.load("assets/happy-buddha.json", function (obj) {
       obj.position.set(0, 60, 100);
       scene.add(obj);
+      material = new THREE.MeshPhongMaterial({specular: '#a9fcff', color: '#00abb1', emissive: '#006063', shininess: 500});
     });
 
     createSphere = function(radius, segments, rings) {
@@ -44,7 +45,36 @@ function init() {
        return new THREE.Mesh(sphere, material);
    };
 
-    geometry = new THREE.TorusGeometry( 200, 40, 16, 100 );
+
+   var closedSpline = new THREE.ClosedSplineCurve3( [
+					new THREE.Vector3( -100, -100,  60 ),
+					new THREE.Vector3( -150,   20,  60 ),
+					new THREE.Vector3( -60,  150,  60 ),
+					new THREE.Vector3(  60,   20, -60 ),
+					new THREE.Vector3(  60, -100, -60 )
+		] );
+
+   var extrudeSettings = {
+    	steps			: 100,
+    	bevelEnabled	: false,
+    	extrudePath		: closedSpline
+	 };
+
+   var pts = [], count = 6;
+
+       for ( var i = 0; i < count; i ++ ) {
+
+         var l = 20;
+
+         var a = 2 * i / count * Math.PI;
+
+         pts.push( new THREE.Vector2 ( Math.cos( a ) * l, Math.sin( a ) * l ) );
+
+       }
+
+    var shape = new THREE.Shape( pts );
+
+    var geometry = new THREE.ExtrudeGeometry( shape, extrudeSettings );
     material = new THREE.MeshPhongMaterial( { map: THREE.ImageUtils.loadTexture('assets/iris.gif') } );
 
     mesh = new THREE.Mesh( geometry, material );
