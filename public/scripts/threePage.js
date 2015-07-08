@@ -34,7 +34,7 @@ function init() {
          radius = 50;
        }
        if (segments == null) {
-         segments = 100;
+         segments = 10;
        }
        if (rings == null) {
          rings = 16;
@@ -89,7 +89,6 @@ function animate() {
                   light.position.y += 300
                 }
               };
-    OBJLoaded.rotation.x += (0.2*(Math.PI / 180));
 
     lightPosition(lights[0]);
     lightPosition(lights[1]);
