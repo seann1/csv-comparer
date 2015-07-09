@@ -117,7 +117,14 @@ function animate() {
                   light.position.y += 300
                 }
     };
-    object.position.z -= 1;
+    if (object.position.z > -500) {
+      object.position.z -= 1;
+    }
+    else {
+      object.position.z = 100;
+    }
+
+    //object.materials[0].opacity = 1 + Math.sin(new Date().getTime() * .0025);
 
     lightPosition(lights[0]);
     lightPosition(lights[1]);
