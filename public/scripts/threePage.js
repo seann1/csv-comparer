@@ -79,32 +79,30 @@ function init() {
 
     mesh = new THREE.Mesh( geometry, material );
     scene.add(mesh);
-    var x = 0;
-    var y = 50;
+    var x = 200;
+    var y = 180;
     var z = 100;
     lights = [];
-    for(var i = 0; i < 7; i++) {
-      colorsArray = [0x00ff65, 0xe1ff00, 0xfa00ff, 0x0040ff];
+    for(var i = 0; i < 14; i++) {
+      colorsArray = [0x00ff65, 0xe1ff00, 0xfa00ff, 0x0040ff, 0x00ff04, 0xffaa00];
       lights[i] = new THREE.PointLight(_.sample(colorsArray), 1, 100 );
-      lights[i].position.set(x, y, z);
-      lights[i].intensity = 100;
+      lights[i].position.set(_.random(2, 300), _.random(2, 300), _.random(2, 100));
+      lights[i].intensity = _.random(2, 300);
       scene.add(lights[i]);
-      x -= 100;
-      y -= 100;
-      z -= 100;
+      x -= 10;
+      y -= 10;
+      z -= 10;
     }
     var radius = 100;
-    object = createSphere(radius);
+    object = createSphere();
     scene.add(new THREE.AmbientLight(0xff00F0));
     scene.add(object);
+    console.log(object);
 
     renderer = new THREE.WebGLRenderer({ alpha: true });
     renderer.setSize( 500, 500 );
 
     document.getElementById("threed").appendChild( renderer.domElement );
-    console.log(geometry);
-    console.log(mesh);
-    console.log(lights);
 }
 
 function animate() {
@@ -118,7 +116,8 @@ function animate() {
                   light.position.x += 300
                   light.position.y += 300
                 }
-              };
+    };
+    object.position.z -= 1;
 
     lightPosition(lights[0]);
     lightPosition(lights[1]);
@@ -128,7 +127,6 @@ function animate() {
     lightPosition(lights[5]);
     object.rotation.x += 0.01;
     object.position.x += 0.01;
-
     // note: three.js includes requestAnimationFrame shim
     requestAnimationFrame( animate );
     mesh.rotation.x += 0.01;
