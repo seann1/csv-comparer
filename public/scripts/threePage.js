@@ -24,9 +24,14 @@ function init() {
     scene = new THREE.Scene();
 
     loader.load("assets/happy-buddha.json", function (obj) {
-      obj.position.set(0, 60, 100);
-      scene.add(obj);
-      material = new THREE.MeshPhongMaterial({specular: '#a9fcff', color: '#00abb1', emissive: '#006063', shininess: 500});
+      obj.position.set(0, 30, 50);
+      scene.add(obj.children[1]);
+      scene.add(obj.children[2]);
+      //scene.add(obj.children[4]);
+      //scene.add(obj.children[7]);
+      //scene.add(obj.children[8]);
+      console.log(obj);
+      //material = new THREE.MeshPhongMaterial({color: '#00abb1', shininess: 20});
     });
 
     createSphere = function(radius, segments, rings) {
@@ -87,7 +92,7 @@ function init() {
       colorsArray = [0x00ff65, 0xe1ff00, 0xfa00ff, 0x0040ff, 0x00ff04, 0xffaa00];
       lights[i] = new THREE.PointLight(_.sample(colorsArray), 1, 100 );
       lights[i].position.set(_.random(2, 300), _.random(2, 300), _.random(2, 100));
-      lights[i].intensity = _.random(2, 300);
+      lights[i].intensity = _.random(2, 10);
       scene.add(lights[i]);
       x -= 10;
       y -= 10;
