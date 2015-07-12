@@ -27,9 +27,6 @@ function init() {
       obj.position.set(0, 30, 50);
       scene.add(obj.children[1]);
       scene.add(obj.children[2]);
-      //scene.add(obj.children[4]);
-      //scene.add(obj.children[7]);
-      //scene.add(obj.children[8]);
       console.log(obj);
       //material = new THREE.MeshPhongMaterial({color: '#00abb1', shininess: 20});
     });
@@ -144,6 +141,7 @@ function animate() {
     mesh.rotation.x += 0.01;
     mesh.rotation.y += 0.01;
     controls.update();
+    TWEEN.update();
 
     renderer.render( scene, camera );
 
