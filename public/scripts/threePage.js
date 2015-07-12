@@ -104,13 +104,27 @@ function init() {
     renderer.setSize( 500, 500 );
 
     var thisTween = new TWEEN.Tween(object.material.color)
-    .to({r: 1, g: 0, b: 0 }, 5000).start()
+    .to({r: .896, g: .27644, b: 0.78999 }, 2000)
     .onUpdate(function() {
       object.material.color.r = this.r;
       object.material.color.g = this.g;
       object.material.color.b = this.b;
 
-    }).start().repeat(Infinity);
+    }).easing(TWEEN.Easing.Quadratic.In);
+
+    var tweenBack = new TWEEN.Tween(object.material.color)
+    .to({r: .34, g: .24, b: 0 }, 2000)
+    .onUpdate(function() {
+      object.material.color.r = this.r;
+      object.material.color.g = this.g;
+      object.material.color.b = this.b;
+
+    }).easing(TWEEN.Easing.Quadratic.In);
+
+    thisTween.chain(tweenBack);
+    tweenBack.chain(thisTween);
+
+    thisTween.start();
 
     document.getElementById("threed").appendChild( renderer.domElement );
 }
