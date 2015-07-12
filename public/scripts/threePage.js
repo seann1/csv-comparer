@@ -1,7 +1,6 @@
 var camera, scene, renderer;
 var geometry, material, mesh;
 
-
 init();
 animate();
 
@@ -99,10 +98,19 @@ function init() {
     object = createSphere();
     scene.add(new THREE.AmbientLight(0xff00F0));
     scene.add(object);
-    console.log(object);
+    console.log(object.material.color);
 
     renderer = new THREE.WebGLRenderer({ alpha: true });
     renderer.setSize( 500, 500 );
+
+    var thisTween = new TWEEN.Tween(object.material.color)
+    .to({r: 1, g: 0, b: 0 }, 5000).start()
+    .onUpdate(function() {
+      object.material.color.r = this.r;
+      object.material.color.g = this.g;
+      object.material.color.b = this.b;
+
+    }).start().repeat(Infinity);
 
     document.getElementById("threed").appendChild( renderer.domElement );
 }
@@ -125,8 +133,6 @@ function animate() {
     else {
       object.position.z = 100;
     }
-
-    //object.materials[0].opacity = 1 + Math.sin(new Date().getTime() * .0025);
 
     lightPosition(lights[0]);
     lightPosition(lights[1]);
