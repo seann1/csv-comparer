@@ -101,7 +101,7 @@ function init() {
     console.log(object.material.color);
 
     renderer = new THREE.WebGLRenderer({ alpha: true });
-    renderer.setSize( 500, 500 );
+    renderer.setSize( window.innerWidth, (window.innerWidth / 1.5) );
 
     var thisTween = new TWEEN.Tween(object.material.color)
     .to({r: .896, g: .27644, b: 0.78999 }, 2000)
@@ -124,9 +124,32 @@ function init() {
     thisTween.chain(tweenBack);
     tweenBack.chain(thisTween);
 
+    //var position = { x : 0, z: 300 };
+    //var target = { x : 200, z: -300 };
+
+    var update	= function(){
+      object.position.z = current.z;
+    }
+    var current = {z:100};
+
+    var sphereTween = new TWEEN.Tween(current)
+    .to({z: -150}, 2300)
+    .easing(TWEEN.Easing.Elastic.In)
+    .onUpdate(update);
+
+    var sphereBack = new TWEEN.Tween(current)
+    .to({z: 150}, 2300)
+    .easing(TWEEN.Easing.Elastic.In)
+    .onUpdate(update);
+
+    sphereTween.chain(sphereBack);
+    sphereBack.chain(sphereTween);
+
     thisTween.start();
+    sphereTween.start();
 
     document.getElementById("threed").appendChild( renderer.domElement );
+    //document.body.appendChild( renderer.domElement );
 }
 
 function animate() {
@@ -141,12 +164,6 @@ function animate() {
                   light.position.y += 300
                 }
     };
-    if (object.position.z > -500) {
-      object.position.z -= 1;
-    }
-    else {
-      object.position.z = 100;
-    }
 
     lightPosition(lights[0]);
     lightPosition(lights[1]);
@@ -155,7 +172,7 @@ function animate() {
     lightPosition(lights[4]);
     lightPosition(lights[5]);
     object.rotation.x += 0.01;
-    object.position.x += 0.01;
+    //object.position.x += 0.01;
     // note: three.js includes requestAnimationFrame shim
     requestAnimationFrame( animate );
     mesh.rotation.x += 0.01;
