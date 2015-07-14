@@ -42,9 +42,28 @@ function init() {
          rings = 16;
        }
        sphere = new THREE.SphereGeometry(radius, segments, rings);
-       material = new THREE.MeshPhongMaterial({specular: '#a9fcff', color: '#00abb1', emissive: '#006063', shininess: 500});
+       material = new THREE.MeshPhongMaterial({specular: '#a9fcff', emissive: '#006063', shininess: 500});
        return new THREE.Mesh(sphere, material);
    };
+
+   createOtherSphere = function(radius, segments, rings) {
+     var material, sphere;
+     if (radius == null) {
+       radius = 50;
+     }
+     if (segments == null) {
+       segments = 10;
+     }
+     if (rings == null) {
+       rings = 16;
+     }
+     sphere2 = new THREE.SphereGeometry(radius, segments, rings);
+     _.each(sphere2.faces, function(face) {
+         face.color.setRGB( Math.random(),Math.random(), Math.random());
+     });
+     material2 = new THREE.MeshPhongMaterial({ vertexColors: THREE.VertexColors });
+     return new THREE.Mesh(sphere2, material2);
+   }
 
 
    var closedSpline = new THREE.ClosedSplineCurve3( [
@@ -96,13 +115,15 @@ function init() {
     }
     var radius = 100;
     object = createSphere();
+    otherObject = createOtherSphere();
     scene.add(new THREE.AmbientLight(0xff00F0));
+    scene.add(otherObject);
     scene.add(object);
-    console.log(object.material.color);
+    console.log(object.geometry);
+    console.log(object.geometry.faces);
 
     renderer = new THREE.WebGLRenderer({ alpha: true });
     renderer.setSize( window.innerWidth, (window.innerWidth / 1.5) );
-
     var thisTween = new TWEEN.Tween(object.material.color)
     .to({r: .896, g: .27644, b: 0.78999 }, 2000)
     .onUpdate(function() {
@@ -124,8 +145,8 @@ function init() {
     thisTween.chain(tweenBack);
     tweenBack.chain(thisTween);
 
-    //var position = { x : 0, z: 300 };
-    //var target = { x : 200, z: -300 };
+    var position = { x : 0, z: 300 };
+    var target = { x : 200, z: -300 };
 
     var update	= function(){
       object.position.z = current.z;
@@ -149,7 +170,6 @@ function init() {
     sphereTween.start();
 
     document.getElementById("threed").appendChild( renderer.domElement );
-    //document.body.appendChild( renderer.domElement );
 }
 
 function animate() {
