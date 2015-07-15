@@ -119,7 +119,7 @@ function init() {
     scene.add(new THREE.AmbientLight(0xff00F0));
     scene.add(otherObject);
     scene.add(object);
-    console.log(object.geometry);
+    console.log(otherObject.geometry);
     console.log(object.geometry.faces);
 
     renderer = new THREE.WebGLRenderer({ alpha: true });
