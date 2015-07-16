@@ -117,13 +117,30 @@ function init() {
     var radius = 100;
     object = createSphere();
     otherObject = createOtherSphere();
-    var ambLight = new THREE.AmbientLight(0xff00F0);
+    ambLight = new THREE.AmbientLight(0xff00F0);
     scene.add(ambLight);
     scene.add(otherObject);
     scene.add(object);
+    console.log(ambLight.color);
 
     renderer = new THREE.WebGLRenderer({ alpha: true });
     renderer.setSize( window.innerWidth, (window.innerWidth / 1.5) );
+    var lightTween = new TWEEN.Tween(ambLight.color)
+    .to({r: 0.896, g: 0.27644, b: 0.78999 }, 2000)
+    .onUpdate(function() {
+      ambLight.color.r = this.r;
+      ambLight.color.g = this.g;
+      ambLight.color.b = this.b;
+    }).easing(TWEEN.Easing.Quadratic.In);
+
+    var lightBack = new TWEEN.Tween(ambLight.color)
+    .to({r: 0.6, g: 0.8, b: 0 }, 2000)
+    .onUpdate(function() {
+      ambLight.color.r = this.r;
+      ambLight.color.g = this.g;
+      ambLight.color.b = this.b;
+    }).easing(TWEEN.Easing.Quadratic.In);
+
     var thisTween = new TWEEN.Tween(object.material.color)
     .to({r: .896, g: .27644, b: 0.78999 }, 2000)
     .onUpdate(function() {
@@ -144,6 +161,8 @@ function init() {
 
     thisTween.chain(tweenBack);
     tweenBack.chain(thisTween);
+    lightTween.chain(lightBack);
+    lightBack.chain(lightTween);
 
     var position = { x : 0, z: 300 };
     var target = { x : 200, z: -300 };
