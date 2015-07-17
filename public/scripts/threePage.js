@@ -27,7 +27,6 @@ function init() {
       scene.add(obj.children[1]);
       scene.add(obj.children[2]);
       console.log(obj);
-      //material = new THREE.MeshPhongMaterial({color: '#00abb1', shininess: 20});
     });
 
     createSphere = function(radius, segments, rings) {
@@ -96,10 +95,16 @@ function init() {
     var shape = new THREE.Shape( pts );
 
     var geometry = new THREE.ExtrudeGeometry( shape, extrudeSettings );
-    material = new THREE.MeshPhongMaterial( { map: THREE.ImageUtils.loadTexture('assets/iris.gif') } );
+    var texture = THREE.ImageUtils.loadTexture('assets/iris.gif');
+    texture.wrapS = THREE.RepeatWrapping;
+    //texture.offset = 0.0002;
+    material = new THREE.MeshPhongMaterial( { map: texture, shininess: 500, transparent: true } );
+    material.opacity = 0.5;
 
     mesh = new THREE.Mesh( geometry, material );
+    mesh2 = new THREE.Mesh( geometry, material );
     scene.add(mesh);
+    scene.add(mesh2);
     console.log(mesh.geometry);
     var x = 200;
     var y = 180;
@@ -228,6 +233,8 @@ function animate() {
     requestAnimationFrame( animate );
     mesh.rotation.x += 0.01;
     mesh.rotation.y += 0.01;
+    mesh2.rotation.x -= 0.01;
+    mesh2.rotation.y -= 0.01;
     controls.update();
     TWEEN.update();
 
