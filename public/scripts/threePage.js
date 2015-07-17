@@ -83,11 +83,8 @@ function init() {
    var pts = [], count = 6;
 
        for ( var i = 0; i < count; i ++ ) {
-
          var l = 20;
-
          var a = 2 * i / count * Math.PI;
-
          pts.push( new THREE.Vector2 ( Math.cos( a ) * l, Math.sin( a ) * l ) );
 
        }
@@ -98,14 +95,28 @@ function init() {
     var texture = THREE.ImageUtils.loadTexture('assets/iris.gif');
     texture.wrapS = THREE.RepeatWrapping;
     //texture.offset = 0.0002;
-    material = new THREE.MeshPhongMaterial( { map: texture, shininess: 500, transparent: true } );
-    material.opacity = 0.5;
+    material = new THREE.MeshPhongMaterial( { map: texture, shininess: 500, transparent: true, opacity: 1.0 } );
+    //material.opacity = 0.5;
 
     mesh = new THREE.Mesh( geometry, material );
     mesh2 = new THREE.Mesh( geometry, material );
     scene.add(mesh);
     scene.add(mesh2);
-    console.log(mesh.geometry);
+    console.log(mesh.material.opacity);
+
+    var opacityTween = new TWEEN.Tween(mesh.material)
+    .to({ opacity: 0.1 }, 5000)
+    .easing(TWEEN.Easing.Quadratic.In);
+
+    var opacityBack = new TWEEN.Tween(mesh.material)
+    .to({opacity: 1.0}, 5000)
+    .easing(TWEEN.Easing.Quadratic.In);
+
+
+    opacityTween.chain(opacityBack);
+    opacityBack.chain(opacityTween);
+    opacityTween.start();
+
     var x = 200;
     var y = 180;
     var z = 100;
@@ -135,7 +146,6 @@ function init() {
     var end = { r: 0.6, g: 0.8, b: 0.5 };
     var currentLight = { r: 0.0, g: 0.0, b: 0.0 };
 
-    TWEEN.removeAll();
     var lightTween = new TWEEN.Tween(currentLight)
     .to(end, 2000)
     .easing(TWEEN.Easing.Quadratic.In)
@@ -154,7 +164,6 @@ function init() {
       ambLight.color.b = currentLight.b;
     });
 
-    TWEEN.removeAll();
     lightTween.chain(lightBack);
     lightBack.chain(lightTween);
     lightTween.start();
