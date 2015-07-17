@@ -37,7 +37,25 @@ csvParser.directive("fileDropzone", function() {
   }
 });
 
+// csvParser.directive('onKeydown', function() {
+//   return {
+//     restrict: 'A',
+//     link: function(scope, elem, attrs) {
+//       var functionToCall = scope.$eval(attrs.ngKeydown);
+//       elem.on('keydown', function(e) {
+//         functionToCall(e.which);
+//       });
+//     }
+//   };
+// });
+
 csvParser.controller('csvCtrl', ['$scope', function($scope, Upload) {
+    $scope.onKeydown = function(e) {
+      if (e.which === 88) {
+        $scope.xClicked = true;
+        console.log($scope.xClicked)
+      }
+    }
     $scope.datums
     $scope.image = null
     $scope.imageFileName = ''

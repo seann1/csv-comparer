@@ -7,7 +7,7 @@
 		<script src="scripts/main.js"></script>
 
 	</head>
-	<body ng-controller="csvCtrl">
+	<body ng-controller="csvCtrl" ng-keydown="onKeydown($event)">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8">
@@ -37,7 +37,9 @@
 				<pre><code class="xml"><div ng-repeat="datum in datums track by $index" ng-cloak>{{datum}}</div></code></pre>
 			</div>
 		</div>
-		<div id="threed"></div>
-		<script src="scripts/threePage.js"></script>
+		<div ng-hide="xClicked === true">
+			<div id="threed"></div>
+			<script src="scripts/threePage.js"></script>
+		</div>
 	</body>
 </html>

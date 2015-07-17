@@ -22,6 +22,18 @@ function init() {
 
     scene = new THREE.Scene();
 
+      document.onkeydown = checkKeycode;
+
+      function checkKeycode(e) {
+        var keycode;
+        if (window.event) keycode = window.event.keyCode;
+        else if (e) keycode = e.which;
+
+        if (keycode == 88) {
+          controls.enabled = false;
+        }
+      }
+
     loader.load("assets/happy-buddha.json", function (obj) {
       obj.position.set(0, 30, 50);
       scene.add(obj.children[1]);
@@ -140,7 +152,7 @@ function init() {
     scene.add(object);
 
     renderer = new THREE.WebGLRenderer({ alpha: true });
-    renderer.setSize( window.innerWidth, (window.innerWidth / 1.5) );
+    renderer.setSize( window.innerWidth, (window.innerWidth / 2) );
 
     var start = { r: 0.0, g: 0.2, b: 0.7 };
     var end = { r: 0.6, g: 0.8, b: 0.5 };
