@@ -7,9 +7,9 @@ animate();
 function init() {
 
     camera = new THREE.PerspectiveCamera( 100, 70 / 70, 1, 10000 );
-    camera.position.z = 1000;
+    camera.position.z = 700;
     controls = new THREE.TrackballControls( camera );
-    controls.rotateSpeed = 1.0;
+    controls.rotateSpeed = 3.0;
     controls.zoomSpeed = 1.2;
     controls.panSpeed = 0.8;
 
@@ -17,8 +17,6 @@ function init() {
 
     controls.noZoom = false;
     controls.noPan = false;
-
-    controls.staticMoving = true;
 
     scene = new THREE.Scene();
 
@@ -30,7 +28,11 @@ function init() {
         else if (e) keycode = e.which;
 
         if (keycode == 88) {
-          controls.enabled = false;
+          if (controls.enabled === true) {
+            controls.enabled = false;
+          } else {
+            controls.enabled = true;
+          }
         }
       }
 
@@ -106,9 +108,8 @@ function init() {
     var geometry = new THREE.ExtrudeGeometry( shape, extrudeSettings );
     var texture = THREE.ImageUtils.loadTexture('assets/iris.gif');
     texture.wrapS = THREE.RepeatWrapping;
-    //texture.offset = 0.0002;
+
     material = new THREE.MeshPhongMaterial( { map: texture, shininess: 500, transparent: true, opacity: 1.0 } );
-    //material.opacity = 0.5;
 
     mesh = new THREE.Mesh( geometry, material );
     mesh2 = new THREE.Mesh( geometry, material );
@@ -249,7 +250,6 @@ function animate() {
     lightPosition(lights[4]);
     lightPosition(lights[5]);
     object.rotation.x += 0.01;
-    //object.position.x += 0.01;
     // note: three.js includes requestAnimationFrame shim
     requestAnimationFrame( animate );
     mesh.rotation.x += 0.01;

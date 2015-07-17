@@ -144,3 +144,17 @@ body {
   width: 500px;
   height: 500px;
 }
+
+.instToggle {
+  z-index: 100;
+  position: fixed;
+  right: 0px;
+  background-color: rgba(0,0,0,0.2);
+  margin: 5px;
+  p {
+    font-size: 1em;
+    color: #bada55;
+    padding: 10px;
+    padding-bottom: 0px;
+  }
+}
