@@ -38,9 +38,8 @@ function init() {
 
     loader.load("assets/happy-buddha.json", function (obj) {
       obj.position.set(0, 30, 50);
+      obj.castShadow = true;
       scene.add(obj.children[1]);
-      scene.add(obj.children[2]);
-      console.log(obj);
     });
 
     createSphere = function(radius, segments, rings) {
