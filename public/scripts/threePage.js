@@ -20,22 +20,6 @@ function init() {
 
     scene = new THREE.Scene();
 
-      document.onkeydown = checkKeycode;
-
-      function checkKeycode(e) {
-        var keycode;
-        if (window.event) keycode = window.event.keyCode;
-        else if (e) keycode = e.which;
-
-        if (keycode == 88) {
-          if (controls.enabled === true) {
-            controls.enabled = false;
-          } else {
-            controls.enabled = true;
-          }
-        }
-      }
-
     loader.load("assets/happy-buddha.json", function (obj) {
       obj.position.set(0, 30, 50);
       obj.castShadow = true;
@@ -224,6 +208,32 @@ function init() {
 
     thisTween.start();
     sphereTween.start();
+
+    document.onkeydown = checkKeycode;
+
+    function checkKeycode(e) {
+      var keycode;
+      if (window.event) keycode = window.event.keyCode;
+      else if (e) keycode = e.which;
+
+      switch (keycode) {
+        case 88:
+          if (controls.enabled === true) {
+            controls.enabled = false;
+          } else {
+            controls.enabled = true;
+          }
+          break;
+
+        case 66:
+          if (ambLight.visible === true) {
+            ambLight.visible = false;
+          } else {
+            ambLight.visible = true;
+          }
+          break;
+      }
+    }
 
     document.getElementById("threed").appendChild( renderer.domElement );
     console.log(scene);
